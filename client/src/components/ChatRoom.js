@@ -37,6 +37,7 @@ const ChatRoom = props => {
 				setUsers(users);
 			});
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [room]);
 
 	const handleNewMessageChange = e => {
