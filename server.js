@@ -1,8 +1,8 @@
-const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
+const cors = require('cors');
 const {
 	userJoin,
 	getCurrentUser,
@@ -12,22 +12,21 @@ const {
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server);
+const io = socketio(server, { origins: '*:*' });
+app.use(cors({ origins: true }));
 
-// set static folder
-app.use(express.static(path.join(__dirname, 'public')));
-
-const botName = 'ChatCord Bot';
+const botName = 'ChitChat Bot';
 
 // Run when a client connects
 io.on('connection', socket => {
 	// join a room
 	socket.on('joinRoom', ({ username, room }) => {
 		const user = userJoin(socket.id, username, room);
+
 		socket.join(user.room);
 
 		// Emit to only the client
-		socket.emit('message', formatMessage(botName, 'Welcome to ChatCord!'));
+		socket.emit('message', formatMessage(botName, 'Welcome to ChitChat!'));
 
 		// Broadcast when a client connects - emit to everyone but the client
 		socket.broadcast
