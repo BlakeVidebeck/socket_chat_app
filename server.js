@@ -3,6 +3,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
 const cors = require('cors');
+require('dotenv').config();
 const {
 	userJoin,
 	getCurrentUser,
@@ -71,5 +72,14 @@ io.on('connection', socket => {
 });
 
 const PORT = process.env.PORT || 5000;
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static('client/build'));
+
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
 
 server.listen(PORT, () => console.log(`Server listening on PORT: ${PORT}`));
