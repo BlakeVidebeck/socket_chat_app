@@ -1,6 +1,5 @@
 const http = require('http');
 const express = require('express');
-const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
 const cors = require('cors');
 const path = require('path');
@@ -14,7 +13,7 @@ const {
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, { origins: '*:*' });
+const io = require('socket.io')(server, { origins: '*:*' });
 app.use(cors({ origins: true }));
 
 const botName = 'ChitChat Bot';
