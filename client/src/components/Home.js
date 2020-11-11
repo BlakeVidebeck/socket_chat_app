@@ -35,7 +35,7 @@ const Home = () => {
 					</div>
 					<div className='form-control'>
 						<label htmlFor='room'>Room</label>
-						<input
+						{/* <input
 							type='text'
 							name='room'
 							class='room'
@@ -43,7 +43,7 @@ const Home = () => {
 							value={roomName}
 							onChange={handleRoomNameChange}
 							required
-						/>
+						/> */}
 						<select
 							name='room'
 							class='room'
