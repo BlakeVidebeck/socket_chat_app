@@ -3,6 +3,7 @@ const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const {
 	userJoin,
