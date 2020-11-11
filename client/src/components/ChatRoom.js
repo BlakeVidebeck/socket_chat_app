@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import Message from './Message';
 import socketIOClient from 'socket.io-client';
 import Qs from 'qs';
-const socket = socketIOClient(window.location.origin);
+const serverURI = 'https://stark-chamber-70503.herokuapp.com/';
+const socket = socketIOClient(serverURI);
 
 const ChatRoom = props => {
 	const { username, room } = Qs.parse(props.location.search, {
